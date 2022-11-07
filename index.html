@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Military Alphabet Test</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+    * {
+        font-family: 'Lato', sans-serif;
+    }
+
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    h1{
+        font-size: 10em;
+    }
+</style>
+<body>
+    <h1 id="letter">T</h1>
+    <div>
+        <input type="text" id="input" onfocus="this.value=''" value="Enter full name"></input>
+        <button id="submit" onclick="checkAnswer()">Submit</button>
+        <button id="reroll" onclick="newLetter()">New Letter</button>
+    </div>
+    <p id="answerText"></p>
+</body>
+</html>
+
+<script>
+    const content = [['A', 'alpha'],
+                    ['B', 'bravo'],
+                    ['C', 'charlie'],
+                    ['D', 'delta'],
+                    ['E', 'echo'],
+                    ['F', 'foxtrot'],
+                    ['G', 'golf'],
+                    ['H', 'hotel'],
+                    ['I', 'india'],
+                    ['J', 'juliet'],
+                    ['K', 'kilo'],
+                    ['L', 'lima'],
+                    ['M', 'mike'],
+                    ['N', 'november'],
+                    ['O', 'oscar'],
+                    ['P', 'papa'],
+                    ['Q', 'quebec'],
+                    ['R', 'romeo'],
+                    ['S', 'sierra'],
+                    ['T', 'tango'],
+                    ['U', 'uniform'],
+                    ['V', 'victor'],
+                    ['W', 'whiskey'],
+                    ['X', 'xray'],
+                    ['Y', 'yankee'],
+                    ['Z', 'zulu']];
+
+    let letter = document.getElementById('letter');
+    let input = document.getElementById("input");
+    let answerText = document.getElementById('answerText')
+    let random;
+    newLetter();
+
+    function checkAnswer(){
+        if(input.value.toLowerCase() == content[random][1]){
+            answerText.textContent = 'Correct!';
+        }
+        else
+            answerText.textContent = 'Try again!';
+    };
+
+    function newLetter(){
+        random = Math.floor(Math.random() * 25);
+        letter.textContent = content[random][0];
+        answerText.textContent = '';
+        input.value = 'Enter full name';
+    };
+
+    input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("submit").click();
+        }
+    });
+</script>
