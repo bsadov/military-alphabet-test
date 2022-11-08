@@ -1,4 +1,4 @@
-# Military Alphabet Test
+# Phonetic Alphabet Test
 
 A simple tool to test your military phonetic alphabet knowledge
 
