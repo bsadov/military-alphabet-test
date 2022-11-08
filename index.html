@@ -25,11 +25,12 @@
     }
 </style>
 <body>
-    <h1 id="letter">T</h1>
+    <h1 id="letter"></h1>
     <div>
-        <input type="text" id="input" onfocus="this.value=''" value="Enter full name"></input>
+        <input type="text" id="input" placeholder="Enter Answer"></input>
         <button id="submit" onclick="checkAnswer()">Submit</button>
-        <button id="reroll" onclick="newLetter()">New Letter</button>
+        <button id="new" onclick="newLetter()">New Letter</button>
+        <button id="hint" onclick="showHint()">Hint</button>
     </div>
     <p id="answerText"></p>
 </body>
@@ -63,31 +64,84 @@
                     ['Y', 'yankee'],
                     ['Z', 'zulu']];
 
-    let letter = document.getElementById('letter');
-    let input = document.getElementById("input");
-    let answerText = document.getElementById('answerText')
+    let letterEle = document.getElementById('letter');
+    let inputBox = document.getElementById("input");
+    let answerText = document.getElementById('answerText');
+    let submitBtn = document.getElementById("submit");
+    let hintBtn = document.getElementById("hint");
+    let newBtn = document.getElementById("new")
     let random;
+    let prevRandom;
+    let hintCount;
     newLetter();
 
     function checkAnswer(){
-        if(input.value.toLowerCase() == content[random][1]){
-            answerText.textContent = 'Correct!';
+        if(random == 0){
+            if(inputBox.value.toLowerCase() == 'alpha' || inputBox.value.toLowerCase() == 'alfa'){
+                correctAnswer();
+                return;
+            }
+            else answerText.textContent = 'Try again!';
         }
-        else
+
+        if(random == 23){
+            if(inputBox.value.toLowerCase() == 'xray' || inputBox.value.toLowerCase() == 'x-ray'){
+                correctAnswer();
+                return;
+            }
+            else answerText.textContent = 'Try again!';
+        }
+        
+        if(inputBox.value.toLowerCase() == content[random][1]){
+            correctAnswer();
+        }
+        else if(inputBox.value != '')
             answerText.textContent = 'Try again!';
     };
 
     function newLetter(){
+        prevRandom = random;
         random = Math.floor(Math.random() * 25);
-        letter.textContent = content[random][0];
+        while(random == prevRandom){
+            random = Math.floor(Math.random() * 25);
+        }
+        letterEle.textContent = content[random][0];
         answerText.textContent = '';
-        input.value = 'Enter full name';
+        inputBox.value = '';
+        hintCount = 1;
+        inputBox.disabled=false;
+        submitBtn.disabled=false;
+        hintBtn.disabled=false;
+        inputBox.focus();
     };
 
-    input.addEventListener("keypress", function(event) {
+    function correctAnswer(){
+        answerText.textContent = 'Correct!';
+        inputBox.disabled=true;
+        submitBtn.disabled=true;
+        hintBtn.disabled=true;
+        newBtn.focus();
+    }
+
+    function showHint(){
+        hintCount++;
+        if(hintCount < content[random][1].length){
+            answerText.textContent = content[random][1].slice(0,hintCount);
+        }
+        else{
+            answerText.textContent = content[random][1].slice(0,hintCount);
+            inputBox.disabled=true;
+            submitBtn.disabled=true;
+            hintBtn.disabled=true;
+            newBtn.focus();
+            answerText.textContent += ' was the answer! Press Enter to try again';
+        }
+    };
+
+    inputBox.addEventListener("keypress", function(event) {
         if (event.key === "Enter") {
         event.preventDefault();
-        document.getElementById("submit").click();
+        submitBtn.click();
         }
     });
 </script>
