@@ -31,6 +31,7 @@ let answerText = document.getElementById('answerText');
 let submitBtn = document.getElementById("submit");
 let hintBtn = document.getElementById("hint");
 let newBtn = document.getElementById("new")
+let answerList = document.getElementById("answerList")
 let random;
 let prevRandom;
 let hintCount;
@@ -64,9 +65,7 @@ function checkAnswer(){
 
 function newLetter(){
     if(isComplete){
-        activeLetters = [...content];
-        newBtn.textContent='New Letter';
-        isComplete = false;
+        resetGame();
     }
     prevRandom = random;
     random = Math.floor(Math.random() * activeLetters.length);
@@ -84,12 +83,17 @@ function newLetter(){
 };
 
 function correctAnswer(){
+    /* adds latest correct entry to side-list */
+    let newEle = document.createElement('li');
+    newEle.textContent = activeLetters[random][1];
+    answerList.prepend(newEle);
+
     activeLetters.splice(random, 1);
     if(activeLetters.length == 1){
         newBtn.textContent = 'Final Letter';
     }
     else if(activeLetters.length == 0 && !isComplete){
-        gameComplete();
+        gameCompleted();
         return
     }
     answerText.textContent = 'Correct!';
@@ -114,7 +118,7 @@ function showHint(){
     }
 };
 
-function gameComplete(){
+function gameCompleted(){
     isComplete = true;
     answerText.textContent = 'Congratulations, you got them all!';
     inputBox.disabled=true;
@@ -122,6 +126,15 @@ function gameComplete(){
     hintBtn.disabled=true;
     newBtn.textContent='Reset Game';
     newBtn.focus();
+}
+
+function resetGame(){
+    while (answerList.lastElementChild) {
+        answerList.removeChild(answerList.lastElementChild);
+    }
+    activeLetters = [...content];
+    newBtn.textContent='New Letter';
+    isComplete = false;
 }
 
 inputBox.addEventListener("keypress", function(event) {

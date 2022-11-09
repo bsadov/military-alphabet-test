@@ -23,6 +23,14 @@
     h1{
         font-size: 10em;
     }
+
+    #answerList{
+        position: absolute;
+        right: 5px;
+        bottom: 0;
+        list-style: none;
+        text-align: right;
+    }
 </style>
 <body>
     <h1 id="letter"></h1>
@@ -33,6 +41,7 @@
         <button id="hint" onclick="showHint()">Hint</button>
     </div>
     <p id="answerText"></p>
+    <ol id="answerList"></ol>
 </body>
 <script src="main.js"></script>
 </html>
