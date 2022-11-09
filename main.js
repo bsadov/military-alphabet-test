@@ -32,6 +32,7 @@ let submitBtn = document.getElementById("submit");
 let hintBtn = document.getElementById("hint");
 let newBtn = document.getElementById("new")
 let answerList = document.getElementById("answerList")
+let answersLeft = document.getElementById("answersLeft")
 let random;
 let prevRandom;
 let hintCount;
@@ -89,6 +90,8 @@ function correctAnswer(){
     answerList.prepend(newEle);
 
     activeLetters.splice(random, 1);
+    answersLeft.textContent = activeLetters.length + ' letters left';
+
     if(activeLetters.length == 1){
         newBtn.textContent = 'Final Letter';
     }
@@ -129,10 +132,11 @@ function gameCompleted(){
 }
 
 function resetGame(){
-    while (answerList.lastElementChild) {
-        answerList.removeChild(answerList.lastElementChild);
+    while (answerList.firstChild != answersLeft) {
+        answerList.firstChild.remove()
     }
     activeLetters = [...content];
+    answersLeft.textContent = activeLetters.length + ' letters left';
     newBtn.textContent='New Letter';
     isComplete = false;
 }
