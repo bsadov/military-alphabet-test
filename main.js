@@ -41,24 +41,17 @@ let isComplete = false;
 newLetter();
 
 function checkAnswer(){
-    if(activeLetters[random][0] == 'A'){
-        if(inputBox.value.toLowerCase() == 'alpha' || inputBox.value.toLowerCase() == 'alfa'){
-            correctAnswer();
-            return;
-        }
-        else answerText.textContent = 'Try again!';
+    if(activeLetters[random][0] == 'A' && inputBox.value.toLowerCase() == 'alfa'){
+        correctAnswer();
+        return;
     }
-
-    if(activeLetters[random][0] == 'X'){
-        if(inputBox.value.toLowerCase() == 'xray' || inputBox.value.toLowerCase() == 'x-ray'){
-            correctAnswer();
-            return;
-        }
-        else answerText.textContent = 'Try again!';
+    if(activeLetters[random][0] == 'X' && inputBox.value.toLowerCase() == 'x-ray'){
+        correctAnswer();
+        return;
     }
-    
     if(inputBox.value.toLowerCase() == activeLetters[random][1]){
         correctAnswer();
+        return;
     }
     else if(inputBox.value != '')
         answerText.textContent = 'Try again!';
