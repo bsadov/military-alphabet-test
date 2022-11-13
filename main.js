@@ -1,4 +1,4 @@
-const content = [['A', 'alpha'],
+const content = [['A', 'alpha', 'alfa'],
                 ['B', 'bravo'],
                 ['C', 'charlie'],
                 ['D', 'delta'],
@@ -7,7 +7,7 @@ const content = [['A', 'alpha'],
                 ['G', 'golf'],
                 ['H', 'hotel'],
                 ['I', 'india'],
-                ['J', 'juliet'],
+                ['J', 'juliet', 'juliett'],
                 ['K', 'kilo'],
                 ['L', 'lima'],
                 ['M', 'mike'],
@@ -21,7 +21,7 @@ const content = [['A', 'alpha'],
                 ['U', 'uniform'],
                 ['V', 'victor'],
                 ['W', 'whiskey'],
-                ['X', 'xray'],
+                ['X', 'xray', 'x-ray'],
                 ['Y', 'yankee'],
                 ['Z', 'zulu']];
 let activeLetters = [...content];
@@ -39,23 +39,6 @@ let hintCount;
 let isComplete = false;
 
 newLetter();
-
-function checkAnswer(){
-    if(activeLetters[random][0] == 'A' && inputBox.value.toLowerCase() == 'alfa'){
-        correctAnswer();
-        return;
-    }
-    if(activeLetters[random][0] == 'X' && inputBox.value.toLowerCase() == 'x-ray'){
-        correctAnswer();
-        return;
-    }
-    if(inputBox.value.toLowerCase() == activeLetters[random][1]){
-        correctAnswer();
-        return;
-    }
-    else if(inputBox.value != '')
-        answerText.textContent = 'Try again!';
-};
 
 function newLetter(){
     if(isComplete){
@@ -76,10 +59,20 @@ function newLetter(){
     inputBox.focus();
 };
 
+function checkAnswer(){
+    /* OR check for alternate spellings */
+    if(inputBox.value.toLowerCase() == activeLetters[random][1] || inputBox.value.toLowerCase() == activeLetters[random][2]){
+        correctAnswer();
+        return;
+    }
+    else if(inputBox.value != '')
+        answerText.textContent = 'Try again!';
+};
+
 function correctAnswer(){
-    /* adds latest correct entry to side-list */
+    /* prepends latest correct entry to side-list */
     let newEle = document.createElement('li');
-    newEle.textContent = activeLetters[random][1];
+    newEle.textContent = inputBox.value.toLowerCase();
     answerList.prepend(newEle);
 
     activeLetters.splice(random, 1);
