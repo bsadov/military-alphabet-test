@@ -36,12 +36,11 @@ let answersLeft = document.getElementById("answersLeft")
 let random;
 let prevRandom;
 let hintCount;
-let isComplete = false;
 
 newLetter();
 
 function newLetter(){
-    if(isComplete){
+    if(activeLetters.length == 0){
         resetGame();
     }
     prevRandom = random;
@@ -53,9 +52,7 @@ function newLetter(){
     answerText.textContent = '';
     inputBox.value = '';
     hintCount = 1;
-    inputBox.disabled=false;
-    submitBtn.disabled=false;
-    hintBtn.disabled=false;
+    buttonToggle(false);
     inputBox.focus();
 };
 
@@ -81,14 +78,12 @@ function correctAnswer(){
     if(activeLetters.length == 1){
         newBtn.textContent = 'Final Letter';
     }
-    else if(activeLetters.length == 0 && !isComplete){
+    else if(activeLetters.length == 0){
         gameCompleted();
         return
     }
     answerText.textContent = 'Correct!';
-    inputBox.disabled=true;
-    submitBtn.disabled=true;
-    hintBtn.disabled=true;
+    buttonToggle(true);
     newBtn.focus();
 }
 
@@ -99,20 +94,15 @@ function showHint(){
     }
     else{
         answerText.textContent = activeLetters[random][1].slice(0,hintCount);
-        inputBox.disabled=true;
-        submitBtn.disabled=true;
-        hintBtn.disabled=true;
+        buttonToggle(true);
         newBtn.focus();
         answerText.textContent += ' was the answer! Press Enter to try again';
     }
 };
 
 function gameCompleted(){
-    isComplete = true;
     answerText.textContent = 'Congratulations, you got them all!';
-    inputBox.disabled=true;
-    submitBtn.disabled=true;
-    hintBtn.disabled=true;
+    buttonToggle(true);
     newBtn.textContent='Reset Game';
 }
 
@@ -123,7 +113,10 @@ function resetGame(){
     activeLetters = [...content];
     answersLeft.textContent = activeLetters.length + ' letters left';
     newBtn.textContent='New Letter';
-    isComplete = false;
+}
+
+function buttonToggle(boolean){
+    inputBox.disabled = submitBtn.disabled = hintBtn.disabled = boolean;
 }
 
 inputBox.addEventListener("keypress", function(event) {
