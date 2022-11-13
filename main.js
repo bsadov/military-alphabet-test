@@ -114,7 +114,6 @@ function gameCompleted(){
     submitBtn.disabled=true;
     hintBtn.disabled=true;
     newBtn.textContent='Reset Game';
-    newBtn.focus();
 }
 
 function resetGame(){
