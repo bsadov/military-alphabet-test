@@ -91,16 +91,16 @@ function showHint(){
     hintCount++;
     answerText.textContent = activeLetters[random][1].slice(0,hintCount);
     if(hintCount == activeLetters[random][1].length){
+        answerText.textContent += ' was the answer! Press Enter to try again';
         buttonToggle(true);
         newBtn.focus();
-        answerText.textContent += ' was the answer! Press Enter to try again';
     }
 };
 
 function gameCompleted(){
     answerText.textContent = 'Congratulations, you got them all!';
-    buttonToggle(true);
     newBtn.textContent='Reset Game';
+    buttonToggle(true);
 }
 
 function resetGame(){
