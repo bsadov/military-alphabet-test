@@ -89,11 +89,8 @@ function correctAnswer(){
 
 function showHint(){
     hintCount++;
-    if(hintCount < activeLetters[random][1].length){
-        answerText.textContent = activeLetters[random][1].slice(0,hintCount);
-    }
-    else{
-        answerText.textContent = activeLetters[random][1].slice(0,hintCount);
+    answerText.textContent = activeLetters[random][1].slice(0,hintCount);
+    if(hintCount == activeLetters[random][1].length){
         buttonToggle(true);
         newBtn.focus();
         answerText.textContent += ' was the answer! Press Enter to try again';
