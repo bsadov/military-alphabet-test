@@ -13,23 +13,36 @@
         font-family: 'Lato', sans-serif;
     }
 
-    body{
+    body {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
     }
 
-    h1{
+    h1 {
         font-size: 10em;
     }
 
-    #answerList{
+    #answerList {
         position: absolute;
         right: 5px;
         bottom: 0;
         list-style: none;
         text-align: right;
+    }
+    
+    #cheatSheet {
+        position: absolute;
+        top: 0;
+        left: 0;
+        list-style: none;
+    }
+
+    #toggleButton {
+        position: absolute;
+        left: 20px;
+        bottom: 20px;
     }
 </style>
 <body>
@@ -38,8 +51,37 @@
         <input type="text" id="input" placeholder="Enter Answer"></input>
         <button id="submit" onclick="checkAnswer()">Submit</button>
         <button id="new" onclick="newLetter()">New Letter</button>
-        <button id="hint" onclick="showHint()">Hint</button>
+        <button id="hint" onclick="showHint()">Hint (1)</button>
+        <button id="toggleButton">Cheat Sheet</button>
     </div>
+    <ol id="cheatSheet" hidden>
+        <li>A = Alpha</li>
+        <li>B = Bravo</li>
+        <li>C = Charlie</li>
+        <li>D = Delta</li>
+        <li>E = Echo</li>
+        <li>F = Foxtrot</li>
+        <li>G = Golf</li>
+        <li>H = Hotel</li>
+        <li>I = India</li>
+        <li>J = Juliet</li>
+        <li>K = Kilo</li>
+        <li>L = Lima</li>
+        <li>M = Mike</li>
+        <li>N = November</li>
+        <li>O = Oscar</li>
+        <li>P = Papa</li>
+        <li>Q = Quebec</li>
+        <li>R = Romeo</li>
+        <li>S = Sierra</li>
+        <li>T = Tango</li>
+        <li>U = Uniform</li>
+        <li>V = Victor</li>
+        <li>W = Whiskey</li>
+        <li>X = X-ray</li>
+        <li>Y = Yankee</li>
+        <li>Z = Zulu</li>
+    </ol>
     <p id="answerText"></p>
     <ol id="answerList">
         <li id="answersLeft">26 letters left</li>

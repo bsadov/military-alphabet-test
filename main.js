@@ -1,3 +1,14 @@
+const letterEle = document.getElementById('letter');
+const inputBox = document.getElementById("input");
+const answerText = document.getElementById('answerText');
+const submitBtn = document.getElementById("submit");
+const hintBtn = document.getElementById("hint");
+const newBtn = document.getElementById("new");
+const answerList = document.getElementById("answerList");
+const answersLeft = document.getElementById("answersLeft");
+const toggleButton = document.getElementById("toggleButton");
+const cheatSheet = document.getElementById("cheatSheet");
+
 const content = [['A', 'alpha', 'alfa'],
                 ['B', 'bravo'],
                 ['C', 'charlie'],
@@ -24,15 +35,8 @@ const content = [['A', 'alpha', 'alfa'],
                 ['X', 'xray', 'x-ray'],
                 ['Y', 'yankee'],
                 ['Z', 'zulu']];
+
 let activeLetters = [...content];
-let letterEle = document.getElementById('letter');
-let inputBox = document.getElementById("input");
-let answerText = document.getElementById('answerText');
-let submitBtn = document.getElementById("submit");
-let hintBtn = document.getElementById("hint");
-let newBtn = document.getElementById("new")
-let answerList = document.getElementById("answerList")
-let answersLeft = document.getElementById("answersLeft")
 let random;
 let prevRandom;
 let hintCount;
@@ -118,7 +122,15 @@ function buttonToggle(boolean){
 
 inputBox.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
-    event.preventDefault();
-    submitBtn.click();
+        event.preventDefault();
+        submitBtn.click();
     }
+    if (event.key === "1") {
+        event.preventDefault();
+        showHint();
+    }
+});
+
+toggleButton.addEventListener('click', function() {
+    cheatSheet.hidden = !cheatSheet.hidden;
 });
